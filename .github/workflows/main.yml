@@ -25,6 +25,12 @@ jobs:
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y musl-tools
+
+      - name: Add target for cross-compilation
+        run: rustup target add ${{ matrix.target }}
+
       - name: Install Cross
         run: cargo install cross
 
