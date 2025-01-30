@@ -16,7 +16,7 @@ jobs:
 
      - name: Download Professor's Binary
        run: |
-         wget -O symptom_checker/professorbinary "https://github.com/24W-GBAC/commr/releases/download/v3/x86_64-unknown-linux-musl.tar.gz"
+         wget -O symptom_checker/binary.tar.gz "https://github.com/24W-GBAC/commr/releases/download/v3/x86_64-unknown-linux-musl.tar.gz"
          tar -xzf symptom_checker/binary.tar.gz -C symptom_checker
          mv symptom_checker/* symptom_checker/professor-binary
 
