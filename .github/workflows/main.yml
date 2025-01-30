@@ -15,7 +15,7 @@ jobs:
        uses: actions/checkout@v3
 
      - name: Download Professor's Binary
-       run: wget -O symptom_checker/professorbinary "https://github.com/24W-GBAC/commr/blob/main/.github/workflows/main.yml"
+       run: wget -O symptom_checker/professorbinary "https://github.com/24W-GBAC/commr/releases/download/v3/x86_64-unknown-linux-musl.tar.gz"
      - name: Upload Provided Binary
        uses: actions/upload-artifact@v3
        with:
