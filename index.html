@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-     <title>Symptom Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>Symptom Checker CLI Tool</h1>
-    <p>This tool helps users identify possible conditions based on their symptoms.</p>
-    <h2>How to use</h2>
-    <ul>
-	<li>Download the binary from the repository.</li>
-        <li>Run the tool in your terminal.</li>
-	<li>enter your symptom to see possible conditions.</li>
-    </ul>
+
+    <div class="container">
+        <h1>Symptom Checker CLI Tool</h1>
+        <p>This tool helps users identify possible conditions based on their symptoms.</p>
+
+        <h2>How to Use</h2>
+        <ul>
+            <li>Download the binary from the repository.</li>
+            <li>Run the tool in your terminal.</li>
+            <li>Enter your symptom to see possible conditions.</li>
+        </ul>
+
+        <a class="download-btn" href="https://github.com/MAKHAZEL/symptom_checker/releases/latest/download/symptom_checker_binary" download>
+            Download Symptom Checker
+        </a>
+    </div>
+
 </body>
-</html>	
+</html>
