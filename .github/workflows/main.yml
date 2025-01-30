@@ -1,63 +1,37 @@
-
-name: Release Statically Linked Rust Binary
+name: Upload Provided Binary
 
 on:
   push:
     branches:
-      - main  # Trigger on tags like 'v1.0.0'
+      -main # Trigger when pushing to main branch
+  workflow_dispatch: # Allows maual trigger
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target:
-          - x86_64-unknown-linux-musl       # Linux (musl)
-          - aarch64-unknown-linux-musl      # ARM Linux (musl)
-
-    env:
-      BINARY_NAME: commr
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+     - name: Checkout Repository
+       uses: actions/checkout@v3
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+     - name: Download Professor's Binary
+       run: wget -O symptom_checker/professorbinary "https://github.com/24W-GBAC/commr/blob/main/.github/workflows/main.yml"
+     - name: Upload Provided Binary
+       uses: actions/upload-artifact@v3
+       with:
+         name: SymptoRust-Binary
+         path: symptom_checker/professor-binary # Change this to the correct path
 
-      - name: Add target for cross-compilation
-        run: rustup target add x86_64-unknown-linux-musl
-
-      - name: Install Cross
-        run: cargo install cross
-
-      - name: Install Target for Cross Compilation
-        run: rustup target add ${{ matrix.target }}
-
-      - name: Build with Cross
-        run: cross build --target ${{ matrix.target }} --release --verbose
-
-      - name: Create Release Archive
-        run: |
-          mkdir -p release
-
-          if [[ "${{ matrix.target }}" == *"windows"* ]]; then
-            cp target/${{ matrix.target }}/release/$BINARY_NAME.exe release/
-            zip -r ${{ matrix.target }}.zip release
-          elif [[ "${{ matrix.target }}" == *"darwin"* ]]; then
-            cp target/${{ matrix.target }}/release/$BINARY_NAME release/
-            tar -czvf ${{ matrix.target }}.tar.gz -C release $BINARY_NAME
-          else
-            cp target/${{ matrix.target }}/release/$BINARY_NAME release/
-            tar -czvf ${{ matrix.target }}.tar.gz -C release $BINARY_NAME
-          fi
-
-      - name: Upload Release Assets
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            *.tar.gz
-            *.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.COMMR }}
+     - name: Create Github Release
+       uses: softprops/action-gh-release@v1
+       with:
+         files: symptom_checker/professor-binary # Change this to the correct path
+         tag_name: v1.0
+         name: SymptomRust v1.0
+         body: |
+           This is the first release of SymptoRust.
+            - Provided by Professor.
+            - Download the binaary and use it directly.
+env:
+ GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
